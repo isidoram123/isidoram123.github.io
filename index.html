@@ -1,0 +1,1093 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MAR DE LUZ - Productos de Belleza</title>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        line-height: 1.6;
+        color: #5a5a5a;
+        background: #fef9ff;
+    }
+
+    nav {
+        background: linear-gradient(135deg, #ffc3e1 0%, #d4a5ff 50%, #a8d8ff 100%);
+        padding: 1rem 0;
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        box-shadow: 0 2px 15px rgba(255, 195, 225, 0.3);
+    }
+
+    nav .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 2rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    nav .logo {
+        color: white;
+        font-size: 1.8rem;
+        font-weight: bold;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        letter-spacing: 2px;
+        cursor: pointer;
+    }
+
+    nav ul {
+        list-style: none;
+        display: flex;
+        gap: 2rem;
+    }
+
+    nav a {
+        color: white;
+        text-decoration: none;
+        transition: all 0.3s;
+        font-weight: 500;
+        cursor: pointer;
+    }
+
+    nav a:hover {
+        transform: translateY(-2px);
+        text-shadow: 0 2px 8px rgba(255,255,255,0.5);
+    }
+
+    .hero {
+        background: linear-gradient(135deg, #ffc3e1 0%, #d4a5ff 50%, #a8d8ff 100%);
+        color: white;
+        padding: 6rem 2rem;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .hero.hidden {
+        display: none;
+    }
+
+    .hero::before {
+        content: '✧';
+        position: absolute;
+        font-size: 3rem;
+        top: 20%;
+        left: 10%;
+        animation: float 3s ease-in-out infinite;
+        opacity: 0.6;
+    }
+
+    .hero::after {
+        content: '✧';
+        position: absolute;
+        font-size: 3rem;
+        top: 60%;
+        right: 10%;
+        animation: float 3s ease-in-out infinite 1s;
+        opacity: 0.6;
+    }
+
+    .hero h1 {
+        font-size: 3.5rem;
+        margin-bottom: 1rem;
+        animation: fadeInDown 1s;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .hero p {
+        font-size: 1.4rem;
+        margin-bottom: 2rem;
+        animation: fadeInUp 1s;
+    }
+
+    .btn {
+        display: inline-block;
+        padding: 1rem 2.5rem;
+        background: white;
+        color: #d4a5ff;
+        text-decoration: none;
+        border-radius: 50px;
+        font-weight: bold;
+        transition: all 0.3s;
+        cursor: pointer;
+        border: none;
+        font-size: 1rem;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+
+    .btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 25px rgba(212, 165, 255, 0.4);
+    }
+
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 2rem;
+    }
+
+    .breadcrumbs {
+        padding: 1.5rem 2rem;
+        background: white;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    }
+
+    .breadcrumbs-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-size: 0.95rem;
+    }
+
+    .breadcrumb-item {
+        color: #888;
+        text-decoration: none;
+        transition: color 0.3s;
+        cursor: pointer;
+    }
+
+    .breadcrumb-item:hover {
+        color: #d4a5ff;
+    }
+
+    .breadcrumb-item.active {
+        color: #d4a5ff;
+        font-weight: 600;
+    }
+
+    .breadcrumb-separator {
+        color: #ccc;
+    }
+
+    .products-section {
+        padding: 5rem 2rem;
+        background: linear-gradient(180deg, #fef9ff 0%, #f0f8ff 100%);
+    }
+
+    .products-section h2 {
+        text-align: center;
+        font-size: 2.8rem;
+        margin-bottom: 1rem;
+        color: #d4a5ff;
+        text-shadow: 1px 1px 2px rgba(0,0,0,0.05);
+    }
+
+    .section-subtitle {
+        text-align: center;
+        color: #888;
+        margin-bottom: 3rem;
+        font-size: 1.1rem;
+    }
+
+    .products {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2.5rem;
+        max-width: 1000px;
+        margin: 0 auto;
+    }
+
+    .product-card {
+        background: white;
+        padding: 2.5rem;
+        border-radius: 20px;
+        box-shadow: 0 5px 20px rgba(255, 195, 225, 0.2);
+        transition: all 0.3s;
+        cursor: pointer;
+        border: 2px solid transparent;
+        text-align: center;
+    }
+
+    .product-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 35px rgba(212, 165, 255, 0.3);
+        border-color: #ffc3e1;
+    }
+
+    .product-icon {
+        font-size: 3.5rem;
+        margin-bottom: 1.5rem;
+        opacity: 0.8;
+    }
+
+    .product-card h3 {
+        color: #d4a5ff;
+        margin-bottom: 1rem;
+        font-size: 1.8rem;
+    }
+
+    .product-card p {
+        color: #666;
+        line-height: 1.8;
+        margin-bottom: 1.5rem;
+    }
+
+    .product-card .btn {
+        width: 100%;
+        margin-top: 1rem;
+    }
+
+    .catalog-section {
+        padding: 3rem 2rem 5rem;
+        background: linear-gradient(180deg, #fff5fb 0%, #f5f0ff 100%);
+        display: none;
+    }
+
+    .catalog-section.active {
+        display: block;
+    }
+
+    .catalog-header {
+        text-align: center;
+        margin-bottom: 3rem;
+    }
+
+    .catalog-header h2 {
+        font-size: 2.8rem;
+        color: #d4a5ff;
+        margin-bottom: 1rem;
+    }
+
+    .back-btn {
+        background: #ffc3e1;
+        color: white;
+        padding: 1rem 2rem;
+        border: none;
+        border-radius: 50px;
+        font-size: 1.1rem;
+        font-weight: bold;
+        cursor: pointer;
+        transition: all 0.3s;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        box-shadow: 0 4px 15px rgba(255, 195, 225, 0.3);
+    }
+
+    .back-btn:hover {
+        background: #d4a5ff;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(212, 165, 255, 0.4);
+    }
+
+    .back-btn::before {
+        content: '←';
+        font-size: 1.3rem;
+    }
+
+    .catalog-navigation {
+        max-width: 1200px;
+        margin: 0 auto 2rem;
+        padding: 0 2rem;
+    }
+
+    .catalog-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 2rem;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .catalog-item {
+        background: white;
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0 5px 20px rgba(255, 195, 225, 0.2);
+        transition: all 0.3s;
+    }
+
+    .catalog-item:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 30px rgba(212, 165, 255, 0.3);
+    }
+
+    .catalog-item-image {
+        width: 100%;
+        height: 250px;
+        background: linear-gradient(135deg, #ffc3e1 0%, #d4a5ff 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 4rem;
+        opacity: 0.9;
+        overflow: hidden;
+    }
+
+    .catalog-item-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .catalog-item-content {
+        padding: 1.5rem;
+    }
+
+    .catalog-item h3 {
+        color: #d4a5ff;
+        margin-bottom: 0.5rem;
+        font-size: 1.3rem;
+    }
+
+    .catalog-item-price {
+        color: #ffc3e1;
+        font-size: 1.5rem;
+        font-weight: bold;
+        margin: 0.5rem 0;
+    }
+
+    .catalog-item p {
+        color: #666;
+        font-size: 0.95rem;
+        line-height: 1.6;
+    }
+
+    .reviews-section {
+        padding: 5rem 2rem;
+        background: linear-gradient(180deg, #fff5fb 0%, #f5f0ff 100%);
+    }
+
+    .reviews-section h2 {
+        text-align: center;
+        font-size: 2.8rem;
+        margin-bottom: 1rem;
+        color: #ffc3e1;
+    }
+
+    .reviews-container {
+        max-width: 900px;
+        margin: 0 auto;
+    }
+
+    .empty-reviews {
+        text-align: center;
+        padding: 3rem 2rem;
+        background: white;
+        border-radius: 15px;
+        box-shadow: 0 5px 20px rgba(255, 195, 225, 0.15);
+        margin-bottom: 3rem;
+    }
+
+    .empty-reviews-icon {
+        font-size: 4rem;
+        margin-bottom: 1rem;
+        opacity: 0.6;
+    }
+
+    .empty-reviews h3 {
+        color: #d4a5ff;
+        font-size: 1.5rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .empty-reviews p {
+        color: #888;
+        font-size: 1.1rem;
+    }
+
+    .review-card {
+        background: white;
+        padding: 2rem;
+        border-radius: 15px;
+        margin-bottom: 2rem;
+        box-shadow: 0 5px 20px rgba(255, 195, 225, 0.15);
+        border-left: 5px solid #d4a5ff;
+        animation: slideIn 0.5s ease-out;
+    }
+
+    .review-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1rem;
+    }
+
+    .review-name {
+        font-weight: bold;
+        color: #d4a5ff;
+        font-size: 1.2rem;
+    }
+
+    .review-stars {
+        color: #ffd700;
+        font-size: 1.2rem;
+    }
+
+    .review-text {
+        color: #666;
+        line-height: 1.8;
+        font-style: italic;
+    }
+
+    .review-date {
+        color: #999;
+        font-size: 0.9rem;
+        margin-top: 0.5rem;
+        text-align: right;
+    }
+
+    .review-form {
+        background: white;
+        padding: 2.5rem;
+        border-radius: 20px;
+        box-shadow: 0 5px 25px rgba(212, 165, 255, 0.2);
+        max-width: 700px;
+        margin: 3rem auto 0;
+    }
+
+    .review-form h3 {
+        color: #d4a5ff;
+        margin-bottom: 1.5rem;
+        text-align: center;
+        font-size: 1.8rem;
+    }
+
+    .form-group {
+        margin-bottom: 1.5rem;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 0.5rem;
+        color: #5a5a5a;
+        font-weight: 500;
+    }
+
+    input, textarea, select {
+        width: 100%;
+        padding: 1rem;
+        border: 2px solid #ffc3e1;
+        border-radius: 10px;
+        font-size: 1rem;
+        transition: all 0.3s;
+        font-family: inherit;
+    }
+
+    input:focus, textarea:focus, select:focus {
+        outline: none;
+        border-color: #d4a5ff;
+        box-shadow: 0 0 10px rgba(212, 165, 255, 0.2);
+    }
+
+    textarea {
+        resize: vertical;
+        min-height: 120px;
+    }
+
+    .star-rating {
+        display: flex;
+        gap: 0.5rem;
+        font-size: 2rem;
+        margin-bottom: 1rem;
+    }
+
+    .star {
+        cursor: pointer;
+        color: #ddd;
+        transition: all 0.2s;
+    }
+
+    .star:hover,
+    .star.active {
+        color: #ffd700;
+        transform: scale(1.2);
+    }
+
+    .info-note {
+        background: #e6f7ff;
+        border-left: 4px solid #d4a5ff;
+        padding: 1rem 1.5rem;
+        border-radius: 8px;
+        margin-top: 1rem;
+        font-size: 0.9rem;
+        color: #666;
+    }
+
+    .info-note strong {
+        color: #d4a5ff;
+    }
+
+    .contact-section {
+        padding: 5rem 2rem;
+        background: linear-gradient(135deg, #a8d8ff 0%, #d4a5ff 50%, #ffc3e1 100%);
+        color: white;
+        text-align: center;
+    }
+
+    .contact-section h2 {
+        font-size: 2.8rem;
+        margin-bottom: 2rem;
+    }
+
+    .contact-info {
+        display: flex;
+        justify-content: center;
+        gap: 3rem;
+        flex-wrap: wrap;
+        margin-top: 2rem;
+    }
+
+    .contact-item {
+        font-size: 1.2rem;
+    }
+
+    footer {
+        background: #5a5a5a;
+        color: white;
+        text-align: center;
+        padding: 2rem;
+    }
+
+    .loading {
+        text-align: center;
+        padding: 2rem;
+        color: #d4a5ff;
+        font-size: 1.1rem;
+    }
+
+    @keyframes fadeInDown {
+        from {
+            opacity: 0;
+            transform: translateY(-30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes float {
+        0%, 100% {
+            transform: translateY(0);
+        }
+        50% {
+            transform: translateY(-20px);
+        }
+    }
+
+    @keyframes slideIn {
+        from {
+            opacity: 0;
+            transform: translateX(-30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+
+    @media (max-width: 768px) {
+        nav ul {
+            gap: 1rem;
+            font-size: 0.9rem;
+        }
+
+        nav .logo {
+            font-size: 1.3rem;
+        }
+
+        .hero h1 {
+            font-size: 2rem;
+        }
+
+        .hero p {
+            font-size: 1rem;
+        }
+
+        .products {
+            grid-template-columns: 1fr;
+        }
+
+        .catalog-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .contact-info {
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .breadcrumbs-container {
+            font-size: 0.85rem;
+        }
+    }
+
+    .hidden {
+        display: none;
+    }
+</style>
+</head>
+<body>
+<nav>
+    <div class="container">
+        <div class="logo" onclick="volverInicio()">✧ MAR DE LUZ ✧</div>
+        <ul>
+            <li><a onclick="volverInicio()">Inicio</a></li>
+            <li><a onclick="irAProductos()">Productos</a></li>
+            <li><a onclick="irASeccion('resenas')">Reseñas</a></li>
+            <li><a onclick="irASeccion('contacto')">Contacto</a></li>
+        </ul>
+    </div>
+</nav>
+
+<div class="breadcrumbs" id="breadcrumbs" style="display: none;">
+    <div class="breadcrumbs-container">
+        <a class="breadcrumb-item" onclick="volverInicio()">Inicio</a>
+        <span class="breadcrumb-separator">›</span>
+        <a class="breadcrumb-item" onclick="volverProductos()">Productos</a>
+        <span class="breadcrumb-separator">›</span>
+        <span class="breadcrumb-item active" id="currentCategory"></span>
+    </div>
+</div>
+
+<section class="hero" id="hero">
+    <h1>MAR DE LUZ</h1>
+    <p>✧ Productos de Belleza para Cuerpo y Rostro ✧</p>
+    <p>Descubre tu belleza natural con nuestros productos</p>
+    <button class="btn" onclick="irAProductos()">Ver Productos</button>
+</section>
+
+<section class="products-section" id="productos">
+    <h2>Nuestras Categorías</h2>
+    <p class="section-subtitle">Elige la categoría que deseas explorar</p>
+    <div class="products">
+        <div class="product-card" onclick="mostrarCatalogo('facial', 'Cuidado Facial')">
+            <div class="product-icon">✿</div>
+            <h3>Cuidado Facial</h3>
+            <p>Cremas, serums, mascarillas y tratamientos especializados para el rostro.</p>
+            <button class="btn">Ver Catálogo</button>
+        </div>
+        <div class="product-card" onclick="mostrarCatalogo('corporal', 'Cuidado Corporal')">
+            <div class="product-icon">❀</div>
+            <h3>Cuidado Corporal</h3>
+            <p>Exfoliantes, lociones, aceites y cremas para nutrir todo tu cuerpo.</p>
+            <button class="btn">Ver Catálogo</button>
+        </div>
+        <div class="product-card" onclick="mostrarCatalogo('capilar', 'Cuidado Capilar')">
+            <div class="product-icon">✾</div>
+            <h3>Cuidado Capilar</h3>
+            <p>Shampoos, acondicionadores, mascarillas y tratamientos para tu cabello.</p>
+            <button class="btn">Ver Catálogo</button>
+        </div>
+    </div>
+</section>
+
+<section class="catalog-section" id="catalog-facial">
+    <div class="catalog-navigation">
+        <button class="back-btn" onclick="volverProductos()">Volver a Categorías</button>
+    </div>
+    <div class="container">
+        <div class="catalog-header">
+            <h2>✿ Cuidado Facial</h2>
+            <p class="section-subtitle">Productos especializados para tu rostro</p>
+        </div>
+        <div class="catalog-grid">
+            <div class="catalog-item">
+                <div class="catalog-item-image">
+                    <img src="https://makemore.cl/web/image/product.product/20364/image?unique=9b8c3dc" alt="Limpiador facial">
+                </div>
+                <div class="catalog-item-content">
+                    <h3>Limpiador facial con Vitamina C</h3>
+                    <p class="catalog-item-price">$6.600</p>
+                    <p>Limpieza profunda</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="catalog-section" id="catalog-corporal">
+    <div class="catalog-navigation">
+        <button class="back-btn" onclick="volverProductos()">Volver a Categorías</button>
+    </div>
+    <div class="container">
+        <div class="catalog-header">
+            <h2>❀ Cuidado Corporal</h2>
+            <p class="section-subtitle">Mima tu cuerpo con nuestros productos</p>
+        </div>
+        <div class="catalog-grid">
+            <div class="catalog-item">
+                <div class="catalog-item-image">
+                    <img src="https://misucka.cl/web/image/product.product/369/image?unique=8e73e7a" alt="Gel de ducha">
+                </div>
+                <div class="catalog-item-content">
+                    <h3>Gel de ducha</h3>
+                    <p class="catalog-item-price">$7.000</p>
+                    <p>Gel de ducha con aroma veraniego que deja la piel suave y fresca.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="catalog-section" id="catalog-capilar">
+    <div class="catalog-navigation">
+        <button class="back-btn" onclick="volverProductos()">Volver a Categorías</button>
+    </div>
+    <div class="container">
+        <div class="catalog-header">
+            <h2>✾ Cuidado Capilar</h2>
+            <p class="section-subtitle">Dale vida y brillo a tu cabello</p>
+        </div>
+        <div class="catalog-grid">
+            <div class="catalog-item">
+                <div class="catalog-item-image">
+                    <img src="https://makemore.cl/web/image/product.product/20382/image?unique=1c3a90c" alt="Shampoo Keratina">
+                </div>
+                <div class="catalog-item-content">
+                    <h3>Shampoo Keratina</h3>
+                    <p class="catalog-item-price">$4.700</p>
+                    <p>Para cabello seco y dañado. Con aceite de keratina y jojoba.</p>
+                </div>
+            </div>
+            <div class="catalog-item">
+                <div class="catalog-item-image">
+                    <img src="https://makemore.cl/web/image/product.product/20362/image?unique=4bbef9f" alt="Aceite Capilar">
+                </div>
+                <div class="catalog-item-content">
+                    <h3>Aceite capilar</h3>
+                    <p class="catalog-item-price">$6.000</p>
+                    <p>El aceite de palta hidrata y repara profundamente el cabello.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="reviews-section" id="resenas">
+    <h2>✧ Reseñas de Nuestras Clientas ✧</h2>
+    <p class="section-subtitle">Lo que dicen nuestras clientas sobre MAR DE LUZ</p>
+    
+    <div class="reviews-container" id="reviewsContainer">
+        <div class="loading" id="loadingReviews">Cargando reseñas... ✧</div>
+    </div>
+
+    <div class="review-form">
+        <h3>✧ Deja tu Reseña ✧</h3>
+        <form onsubmit="agregarResena(event)">
+            <div class="form-group">
+                <label for="nombre">Tu Nombre:</label>
+                <input type="text" id="nombre" name="nombre" required placeholder="Ej: María López">
+            </div>
+            
+            <div class="form-group">
+                <label>Calificación:</label>
+                <div class="star-rating" id="starRating">
+                    <span class="star" data-rating="1">★</span>
+                    <span class="star" data-rating="2">★</span>
+                    <span class="star" data-rating="3">★</span>
+                    <span class="star" data-rating="4">★</span>
+                    <span class="star" data-rating="5">★</span>
+                </div>
+                <input type="hidden" id="rating" name="rating" value="5" required>
+            </div>
+
+            <div class="form-group">
+                <label for="comentario">Tu Reseña:</label>
+                <textarea id="comentario" name="comentario" required placeholder="Cuéntanos tu experiencia con nuestros productos..."></textarea>
+            </div>
+
+            <div class="info-note">
+                <strong>✧ ¡Conectado a Firebase!</strong> Tu reseña se guardará permanentemente y todos podrán verla.
+            </div>
+
+            <button type="submit" class="btn">Publicar Reseña</button>
+        </form>
+    </div>
+</section>
+
+<section class="contact-section" id="contacto">
+    <h2>Contáctanos</h2>
+    <p>Estamos aquí para ayudarte</p>
+    <div class="contact-info">
+        <div class="contact-item">
+            WhatsApp: +56 9 1234 5678
+        </div>
+        <div class="contact-item">
+            Email: contacto@mardeluz.cl
+        </div>
+        <div class="contact-item">
+            Santiago, Chile
+        </div>
+    </div>
+</section>
+
+<footer>
+    <p>&copy; 2025 MAR DE LUZ - Productos de Belleza. Todos los derechos reservados.</p>
+    <p>✧ Hecho con amor para realzar tu belleza natural ✧</p>
+</footer>
+
+<!-- Firebase SDK con la última versión -->
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-app.js";
+  import { getFirestore, collection, addDoc, getDocs, query, orderBy } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-firestore.js";
+
+  // TUS CREDENCIALES DE FIREBASE
+  const firebaseConfig = {
+    apiKey: "AIzaSyAYbiQNH6WfqidXO-atfw5M-7GxGfTe4V4",
+    authDomain: "tienda-af0d2.firebaseapp.com",
+    projectId: "tienda-af0d2",
+    storageBucket: "tienda-af0d2.firebasestorage.app",
+    messagingSenderId: "218894273452",
+    appId: "1:218894273452:web:8d102c904fb7bc50ae4809",
+    measurementId: "G-8TYNQGB4XQ"
+  };
+
+  // Inicializar Firebase
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+
+  // Cargar reseñas al iniciar
+  cargarResenas();
+
+  // Función para cargar reseñas desde Firebase
+  async function cargarResenas() {
+    const reviewsContainer = document.getElementById('reviewsContainer');
+    
+    try {
+      const q = query(collection(db, 'resenas'), orderBy('fecha', 'desc'));
+      const querySnapshot = await getDocs(q);
+      
+      reviewsContainer.innerHTML = '';
+      
+      if (querySnapshot.empty) {
+        reviewsContainer.innerHTML = `
+          <div class="empty-reviews">
+            <div class="empty-reviews-icon">✧</div>
+            <h3>Aún no hay reseñas</h3>
+            <p>¡Sé la primera en compartir tu experiencia con nuestros productos!</p>
+          </div>
+        `;
+      } else {
+        querySnapshot.forEach((doc) => {
+          const resena = doc.data();
+          agregarResenaAlDOM(resena);
+        });
+      }
+    } catch (error) {
+      console.error('Error al cargar reseñas:', error);
+      reviewsContainer.innerHTML = `
+        <div class="empty-reviews">
+          <div class="empty-reviews-icon">⚠️</div>
+          <h3>Error al cargar reseñas</h3>
+          <p>Verifica tu conexión a internet.</p>
+        </div>
+      `;
+    }
+  }
+
+  function agregarResenaAlDOM(resena) {
+    const reviewsContainer = document.getElementById('reviewsContainer');
+    
+    let estrellas = '';
+    for (let i = 0; i < resena.rating; i++) {
+      estrellas += '⭐';
+    }
+    
+    const fecha = new Date(resena.fecha);
+    const fechaFormateada = fecha.toLocaleDateString('es-ES', { 
+      day: 'numeric', 
+      month: 'long', 
+      year: 'numeric' 
+    });
+    
+    const nuevaResena = document.createElement('div');
+    nuevaResena.className = 'review-card';
+    nuevaResena.innerHTML = `
+      <div class="review-header">
+        <span class="review-name">${resena.nombre}</span>
+        <span class="review-stars">${estrellas}</span>
+      </div>
+      <p class="review-text">"${resena.comentario}"</p>
+      <p class="review-date">${fechaFormateada}</p>
+    `;
+    
+    reviewsContainer.appendChild(nuevaResena);
+  }
+
+  window.agregarResenaFirebase = async function(event) {
+    event.preventDefault();
+    
+    const nombre = document.getElementById('nombre').value;
+    const comentario = document.getElementById('comentario').value;
+    const rating = parseInt(document.getElementById('rating').value);
+    
+    try {
+      await addDoc(collection(db, 'resenas'), {
+        nombre: nombre,
+        comentario: comentario,
+        rating: rating,
+        fecha: new Date().toISOString()
+      });
+      
+      alert(`¡Gracias ${nombre} por tu reseña! ✧\n\nTu opinión ha sido guardada y todos podrán verla.`);
+      
+      document.getElementById('nombre').value = '';
+      document.getElementById('comentario').value = '';
+      document.getElementById('rating').value = '5';
+      selectedRating = 5;
+      updateStars();
+      
+      cargarResenas();
+      
+      document.getElementById('resenas').scrollIntoView({ behavior: 'smooth' });
+      
+    } catch (error) {
+      console.error('Error al guardar reseña:', error);
+      alert('Hubo un error al guardar tu reseña. Por favor, intenta de nuevo.');
+    }
+  };
+</script>
+
+<script>
+    function ocultarHero() {
+        document.getElementById('hero').classList.add('hidden');
+    }
+
+    function mostrarHero() {
+        document.getElementById('hero').classList.remove('hidden');
+    }
+
+    function irAProductos() {
+        ocultarHero();
+        document.getElementById('productos').classList.remove('hidden');
+        document.querySelectorAll('.catalog-section').forEach(section => {
+            section.classList.remove('active');
+        });
+        document.getElementById('breadcrumbs').style.display = 'none';
+        
+        setTimeout(() => {
+            document.getElementById('productos').scrollIntoView({ behavior: 'smooth' });
+        }, 100);
+    }
+
+    function irASeccion(seccionId) {
+        ocultarHero();
+        document.getElementById('productos').classList.add('hidden');
+        document.querySelectorAll('.catalog-section').forEach(section => {
+            section.classList.remove('active');
+        });
+        document.getElementById('breadcrumbs').style.display = 'none';
+        
+        setTimeout(() => {
+            document.getElementById(seccionId).scrollIntoView({ behavior: 'smooth' });
+        }, 100);
+    }
+
+    function mostrarCatalogo(categoria, nombreCategoria) {
+        ocultarHero();
+        document.getElementById('productos').classList.add('hidden');
+        
+        document.querySelectorAll('.catalog-section').forEach(section => {
+            section.classList.remove('active');
+        });
+        
+        document.getElementById('catalog-' + categoria).classList.add('active');
+        document.getElementById('breadcrumbs').style.display = 'block';
+        document.getElementById('currentCategory').textContent = nombreCategoria;
+        
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function volverProductos() {
+        document.querySelectorAll('.catalog-section').forEach(section => {
+            section.classList.remove('active');
+        });
+        
+        document.getElementById('breadcrumbs').style.display = 'none';
+        document.getElementById('productos').classList.remove('hidden');
+        
+        setTimeout(() => {
+            document.getElementById('productos').scrollIntoView({ behavior: 'smooth' });
+        }, 100);
+    }
+
+    function volverInicio() {
+        document.querySelectorAll('.catalog-section').forEach(section => {
+            section.classList.remove('active');
+        });
+        
+        document.getElementById('breadcrumbs').style.display = 'none';
+        document.getElementById('productos').classList.remove('hidden');
+        mostrarHero();
+        
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    let selectedRating = 5;
+    const stars = document.querySelectorAll('.star');
+    const ratingInput = document.getElementById('rating');
+
+    stars.forEach(star => {
+        star.addEventListener('click', function() {
+            selectedRating = parseInt(this.getAttribute('data-rating'));
+            ratingInput.value = selectedRating;
+            updateStars();
+        });
+
+        star.addEventListener('mouseenter', function() {
+            const rating = parseInt(this.getAttribute('data-rating'));
+            highlightStars(rating);
+        });
+    });
+
+    document.getElementById('starRating').addEventListener('mouseleave', function() {
+        updateStars();
+    });
+
+    function highlightStars(rating) {
+        stars.forEach((star, index) => {
+            if (index < rating) {
+                star.classList.add('active');
+            } else {
+                star.classList.remove('active');
+            }
+        });
+    }
+
+    function updateStars() {
+        highlightStars(selectedRating);
+    }
+
+    updateStars();
+
+    function agregarResena(event) {
+        window.agregarResenaFirebase(event);
+    }
+
+    window.addEventListener('scroll', () => {
+        const hero = document.querySelector('.hero');
+        if (!hero.classList.contains('hidden')) {
+            const scrolled = window.pageYOffset;
+            if (scrolled < window.innerHeight) {
+                hero.style.transform = `translateY(${scrolled * 0.5}px)`;
+            }
+        }
+    });
+</script>
+</body>
+</html>
