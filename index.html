@@ -16,13 +16,17 @@
         line-height: 1.6;
         color: #5a5a5a;
         background: #fef9ff;
+        padding-top: 80px; /* Espacio para el nav fijo */
     }
 
+    /* ===== NAVEGACIÓN FIJA ===== */
     nav {
         background: linear-gradient(135deg, #ffc3e1 0%, #d4a5ff 50%, #a8d8ff 100%);
         padding: 1rem 0;
-        position: sticky;
+        position: fixed; /* FIJO */
         top: 0;
+        left: 0;
+        right: 0;
         z-index: 1000;
         box-shadow: 0 2px 15px rgba(255, 195, 225, 0.3);
     }
@@ -34,6 +38,7 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
+        flex-wrap: wrap;
     }
 
     nav .logo {
@@ -49,6 +54,7 @@
         list-style: none;
         display: flex;
         gap: 2rem;
+        flex-wrap: wrap;
     }
 
     nav a {
@@ -57,11 +63,13 @@
         transition: all 0.3s;
         font-weight: 500;
         cursor: pointer;
+        padding: 0.5rem 1rem;
+        border-radius: 20px;
     }
 
     nav a:hover {
+        background: rgba(255, 255, 255, 0.2);
         transform: translateY(-2px);
-        text-shadow: 0 2px 8px rgba(255,255,255,0.5);
     }
 
     .hero {
@@ -71,10 +79,6 @@
         text-align: center;
         position: relative;
         overflow: hidden;
-    }
-
-    .hero.hidden {
-        display: none;
     }
 
     .hero::before {
@@ -149,6 +153,7 @@
         align-items: center;
         gap: 0.5rem;
         font-size: 0.95rem;
+        flex-wrap: wrap;
     }
 
     .breadcrumb-item {
@@ -169,6 +174,15 @@
 
     .breadcrumb-separator {
         color: #ccc;
+    }
+
+    /* ===== SECCIONES ===== */
+    .section {
+        display: none;
+    }
+
+    .section.active {
+        display: block;
     }
 
     .products-section {
@@ -242,11 +256,6 @@
     .catalog-section {
         padding: 3rem 2rem 5rem;
         background: linear-gradient(180deg, #fff5fb 0%, #f5f0ff 100%);
-        display: none;
-    }
-
-    .catalog-section.active {
-        display: block;
     }
 
     .catalog-header {
@@ -274,6 +283,7 @@
         align-items: center;
         gap: 0.5rem;
         box-shadow: 0 4px 15px rgba(255, 195, 225, 0.3);
+        margin-bottom: 2rem;
     }
 
     .back-btn:hover {
@@ -285,12 +295,6 @@
     .back-btn::before {
         content: '←';
         font-size: 1.3rem;
-    }
-
-    .catalog-navigation {
-        max-width: 1200px;
-        margin: 0 auto 2rem;
-        padding: 0 2rem;
     }
 
     .catalog-grid {
@@ -413,6 +417,8 @@
         justify-content: space-between;
         align-items: center;
         margin-bottom: 1rem;
+        flex-wrap: wrap;
+        gap: 0.5rem;
     }
 
     .review-name {
@@ -492,6 +498,7 @@
         gap: 0.5rem;
         font-size: 2rem;
         margin-bottom: 1rem;
+        justify-content: center;
     }
 
     .star {
@@ -600,53 +607,217 @@
         }
     }
 
+    /* ===== OPTIMIZACIÓN MÓVIL ===== */
     @media (max-width: 768px) {
+        body {
+            padding-top: 120px; /* Más espacio para nav en móvil */
+        }
+
+        nav .container {
+            padding: 0 1rem;
+        }
+
         nav ul {
-            gap: 1rem;
-            font-size: 0.9rem;
+            gap: 0.8rem;
+            font-size: 0.85rem;
+            justify-content: center;
+            width: 100%;
+            margin-top: 0.5rem;
         }
 
         nav .logo {
-            font-size: 1.3rem;
+            font-size: 1.4rem;
+            width: 100%;
+            text-align: center;
+        }
+
+        .hero {
+            padding: 4rem 1.5rem;
         }
 
         .hero h1 {
+            font-size: 2.2rem;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+        }
+
+        .btn {
+            padding: 0.9rem 2rem;
+            font-size: 1rem;
+            width: 100%;
+            max-width: 300px;
+        }
+
+        .products-section {
+            padding: 3rem 1rem;
+        }
+
+        .products-section h2 {
             font-size: 2rem;
+        }
+
+        .section-subtitle {
+            font-size: 1rem;
+            padding: 0 1rem;
+        }
+
+        .products {
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+
+        .product-card {
+            padding: 2rem 1.5rem;
+        }
+
+        .product-card h3 {
+            font-size: 1.5rem;
+        }
+
+        .product-icon {
+            font-size: 3rem;
+        }
+
+        .catalog-section {
+            padding: 2rem 1rem 3rem;
+        }
+
+        .catalog-header h2 {
+            font-size: 2rem;
+        }
+
+        .catalog-grid {
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+
+        .catalog-item-image {
+            height: 200px;
+        }
+
+        .back-btn {
+            padding: 0.8rem 1.5rem;
+            font-size: 1rem;
+            width: 100%;
+        }
+
+        .reviews-section {
+            padding: 3rem 1rem;
+        }
+
+        .reviews-section h2 {
+            font-size: 2rem;
+        }
+
+        .review-card {
+            padding: 1.5rem;
+        }
+
+        .review-name {
+            font-size: 1.1rem;
+        }
+
+        .review-form {
+            padding: 2rem 1.5rem;
+            margin: 2rem 1rem 0;
+        }
+
+        .review-form h3 {
+            font-size: 1.5rem;
+        }
+
+        .star-rating {
+            font-size: 1.8rem;
+        }
+
+        .contact-section {
+            padding: 3rem 1.5rem;
+        }
+
+        .contact-section h2 {
+            font-size: 2rem;
+        }
+
+        .contact-info {
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .contact-item {
+            font-size: 1.1rem;
+        }
+
+        .breadcrumbs {
+            padding: 1rem;
+        }
+
+        .breadcrumbs-container {
+            font-size: 0.8rem;
+        }
+
+        footer {
+            padding: 2rem 1rem;
+            font-size: 0.9rem;
+        }
+
+        input, textarea, select {
+            font-size: 16px;
+        }
+    }
+
+    @media (min-width: 769px) and (max-width: 1024px) {
+        .products {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .catalog-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .hero h1 {
+            font-size: 1.8rem;
         }
 
         .hero p {
             font-size: 1rem;
         }
 
-        .products {
-            grid-template-columns: 1fr;
+        .products-section h2,
+        .reviews-section h2,
+        .catalog-header h2,
+        .contact-section h2 {
+            font-size: 1.8rem;
         }
 
-        .catalog-grid {
-            grid-template-columns: 1fr;
+        .product-card {
+            padding: 1.5rem;
         }
 
-        .contact-info {
-            flex-direction: column;
-            gap: 1rem;
+        .review-form {
+            padding: 1.5rem 1rem;
         }
 
-        .breadcrumbs-container {
-            font-size: 0.85rem;
+        .star-rating {
+            font-size: 1.5rem;
         }
-    }
-
-    .hidden {
-        display: none;
     }
 </style>
 </head>
 <body>
+<!-- NAVEGACIÓN FIJA -->
 <nav>
     <div class="container">
-        <div class="logo" onclick="volverInicio()">✧ MAR DE LUZ ✧</div>
+        <div class="logo" onclick="irAInicio()">✧ MAR DE LUZ ✧</div>
         <ul>
-            <li><a onclick="volverInicio()">Inicio</a></li>
+            <li><a onclick="irAInicio()">Inicio</a></li>
             <li><a onclick="irAProductos()">Productos</a></li>
             <li><a onclick="irASeccion('resenas')">Reseñas</a></li>
             <li><a onclick="irASeccion('contacto')">Contacto</a></li>
@@ -654,199 +825,210 @@
     </div>
 </nav>
 
+<!-- BREADCRUMBS -->
 <div class="breadcrumbs" id="breadcrumbs" style="display: none;">
     <div class="breadcrumbs-container">
-        <a class="breadcrumb-item" onclick="volverInicio()">Inicio</a>
+        <a class="breadcrumb-item" onclick="irAInicio()">Inicio</a>
         <span class="breadcrumb-separator">›</span>
-        <a class="breadcrumb-item" onclick="volverProductos()">Productos</a>
+        <a class="breadcrumb-item" onclick="irAProductos()">Productos</a>
         <span class="breadcrumb-separator">›</span>
         <span class="breadcrumb-item active" id="currentCategory"></span>
     </div>
 </div>
 
-<section class="hero" id="hero">
-    <h1>MAR DE LUZ</h1>
-    <p>✧ Productos de Belleza para Cuerpo y Rostro ✧</p>
-    <p>Descubre tu belleza natural con nuestros productos</p>
-    <button class="btn" onclick="irAProductos()">Ver Productos</button>
-</section>
+<!-- SECCIÓN INICIO (HERO + CATEGORÍAS) -->
+<div id="inicio-section" class="section active">
+    <section class="hero">
+        <h1>MAR DE LUZ</h1>
+        <p>✧ Productos de Belleza para Cuerpo y Rostro ✧</p>
+        <p>Descubre tu belleza natural con nuestros productos</p>
+        <button class="btn" onclick="scrollToCategorias()">Ver Productos</button>
+    </section>
 
-<section class="products-section" id="productos">
-    <h2>Nuestras Categorías</h2>
-    <p class="section-subtitle">Elige la categoría que deseas explorar</p>
-    <div class="products">
-        <div class="product-card" onclick="mostrarCatalogo('facial', 'Cuidado Facial')">
-            <div class="product-icon">✿</div>
-            <h3>Cuidado Facial</h3>
-            <p>Cremas, serums, mascarillas y tratamientos especializados para el rostro.</p>
-            <button class="btn">Ver Catálogo</button>
+    <section class="products-section" id="categorias">
+        <h2>Nuestras Categorías</h2>
+        <p class="section-subtitle">Elige la categoría que deseas explorar</p>
+        <div class="products">
+            <div class="product-card" onclick="mostrarCatalogo('facial', 'Cuidado Facial')">
+                <div class="product-icon">✿</div>
+                <h3>Cuidado Facial</h3>
+                <p>Cremas, serums, mascarillas y tratamientos especializados para el rostro.</p>
+                <button class="btn">Ver Catálogo</button>
+            </div>
+            <div class="product-card" onclick="mostrarCatalogo('corporal', 'Cuidado Corporal')">
+                <div class="product-icon">❀</div>
+                <h3>Cuidado Corporal</h3>
+                <p>Exfoliantes, lociones, aceites y cremas para nutrir todo tu cuerpo.</p>
+                <button class="btn">Ver Catálogo</button>
+            </div>
+            <div class="product-card" onclick="mostrarCatalogo('capilar', 'Cuidado Capilar')">
+                <div class="product-icon">✾</div>
+                <h3>Cuidado Capilar</h3>
+                <p>Shampoos, acondicionadores, mascarillas y tratamientos para tu cabello.</p>
+                <button class="btn">Ver Catálogo</button>
+            </div>
         </div>
-        <div class="product-card" onclick="mostrarCatalogo('corporal', 'Cuidado Corporal')">
-            <div class="product-icon">❀</div>
-            <h3>Cuidado Corporal</h3>
-            <p>Exfoliantes, lociones, aceites y cremas para nutrir todo tu cuerpo.</p>
-            <button class="btn">Ver Catálogo</button>
-        </div>
-        <div class="product-card" onclick="mostrarCatalogo('capilar', 'Cuidado Capilar')">
-            <div class="product-icon">✾</div>
-            <h3>Cuidado Capilar</h3>
-            <p>Shampoos, acondicionadores, mascarillas y tratamientos para tu cabello.</p>
-            <button class="btn">Ver Catálogo</button>
-        </div>
-    </div>
-</section>
+    </section>
+</div>
 
-<section class="catalog-section" id="catalog-facial">
-    <div class="catalog-navigation">
-        <button class="back-btn" onclick="volverProductos()">Volver a Categorías</button>
-    </div>
-    <div class="container">
-        <div class="catalog-header">
-            <h2>✿ Cuidado Facial</h2>
-            <p class="section-subtitle">Productos especializados para tu rostro</p>
-        </div>
-        <div class="catalog-grid">
-            <div class="catalog-item">
-                <div class="catalog-item-image">
-                    <img src="https://makemore.cl/web/image/product.product/20364/image?unique=9b8c3dc" alt="Limpiador facial">
-                </div>
-                <div class="catalog-item-content">
-                    <h3>Limpiador facial con Vitamina C</h3>
-                    <p class="catalog-item-price">$6.600</p>
-                    <p>Limpieza profunda</p>
+<!-- CATÁLOGO FACIAL -->
+<div id="catalog-facial" class="section">
+    <section class="catalog-section">
+        <div class="container">
+            <button class="back-btn" onclick="irAProductos()">Volver a Categorías</button>
+            <div class="catalog-header">
+                <h2>✿ Cuidado Facial</h2>
+                <p class="section-subtitle">Productos especializados para tu rostro</p>
+            </div>
+            <div class="catalog-grid">
+                <div class="catalog-item">
+                    <div class="catalog-item-image">
+                        <img src="https://makemore.cl/web/image/product.product/20364/image?unique=9b8c3dc" alt="Limpiador facial">
+                    </div>
+                    <div class="catalog-item-content">
+                        <h3>Limpiador facial con Vitamina C</h3>
+                        <p class="catalog-item-price">$6.600</p>
+                        <p>Limpieza profunda que ilumina y revitaliza tu piel.</p>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
+</div>
 
-<section class="catalog-section" id="catalog-corporal">
-    <div class="catalog-navigation">
-        <button class="back-btn" onclick="volverProductos()">Volver a Categorías</button>
-    </div>
-    <div class="container">
-        <div class="catalog-header">
-            <h2>❀ Cuidado Corporal</h2>
-            <p class="section-subtitle">Mima tu cuerpo con nuestros productos</p>
-        </div>
-        <div class="catalog-grid">
-            <div class="catalog-item">
-                <div class="catalog-item-image">
-                    <img src="https://misucka.cl/web/image/product.product/369/image?unique=8e73e7a" alt="Gel de ducha">
-                </div>
-                <div class="catalog-item-content">
-                    <h3>Gel de ducha</h3>
-                    <p class="catalog-item-price">$7.000</p>
-                    <p>Gel de ducha con aroma veraniego que deja la piel suave y fresca.</p>
-                </div>
+<!-- CATÁLOGO CORPORAL -->
+<div id="catalog-corporal" class="section">
+    <section class="catalog-section">
+        <div class="container">
+            <button class="back-btn" onclick="irAProductos()">Volver a Categorías</button>
+            <div class="catalog-header">
+                <h2>❀ Cuidado Corporal</h2>
+                <p class="section-subtitle">Mima tu cuerpo con nuestros productos</p>
             </div>
-        </div>
-    </div>
-</section>
-
-<section class="catalog-section" id="catalog-capilar">
-    <div class="catalog-navigation">
-        <button class="back-btn" onclick="volverProductos()">Volver a Categorías</button>
-    </div>
-    <div class="container">
-        <div class="catalog-header">
-            <h2>✾ Cuidado Capilar</h2>
-            <p class="section-subtitle">Dale vida y brillo a tu cabello</p>
-        </div>
-        <div class="catalog-grid">
-            <div class="catalog-item">
-                <div class="catalog-item-image">
-                    <img src="https://makemore.cl/web/image/product.product/20382/image?unique=1c3a90c" alt="Shampoo Keratina">
-                </div>
-                <div class="catalog-item-content">
-                    <h3>Shampoo Keratina</h3>
-                    <p class="catalog-item-price">$4.700</p>
-                    <p>Para cabello seco y dañado. Con aceite de keratina y jojoba.</p>
-                </div>
-            </div>
-            <div class="catalog-item">
-                <div class="catalog-item-image">
-                    <img src="https://makemore.cl/web/image/product.product/20362/image?unique=4bbef9f" alt="Aceite Capilar">
-                </div>
-                <div class="catalog-item-content">
-                    <h3>Aceite capilar</h3>
-                    <p class="catalog-item-price">$6.000</p>
-                    <p>El aceite de palta hidrata y repara profundamente el cabello.</p>
+            <div class="catalog-grid">
+                <div class="catalog-item">
+                    <div class="catalog-item-image">
+                        <img src="https://misucka.cl/web/image/product.product/369/image?unique=8e73e7a" alt="Gel de ducha">
+                    </div>
+                    <div class="catalog-item-content">
+                        <h3>Gel de ducha</h3>
+                        <p class="catalog-item-price">$7.000</p>
+                        <p>Gel de ducha con aroma veraniego que deja la piel suave y fresca.</p>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
+</div>
 
-<section class="reviews-section" id="resenas">
-    <h2>✧ Reseñas de Nuestras Clientas ✧</h2>
-    <p class="section-subtitle">Lo que dicen nuestras clientas sobre MAR DE LUZ</p>
-    
-    <div class="reviews-container" id="reviewsContainer">
-        <div class="loading" id="loadingReviews">Cargando reseñas... ✧</div>
-    </div>
-
-    <div class="review-form">
-        <h3>✧ Deja tu Reseña ✧</h3>
-        <form onsubmit="agregarResena(event)">
-            <div class="form-group">
-                <label for="nombre">Tu Nombre:</label>
-                <input type="text" id="nombre" name="nombre" required placeholder="Ej: María López">
+<!-- CATÁLOGO CAPILAR -->
+<div id="catalog-capilar" class="section">
+    <section class="catalog-section">
+        <div class="container">
+            <button class="back-btn" onclick="irAProductos()">Volver a Categorías</button>
+            <div class="catalog-header">
+                <h2>✾ Cuidado Capilar</h2>
+                <p class="section-subtitle">Dale vida y brillo a tu cabello</p>
             </div>
-            
-            <div class="form-group">
-                <label>Calificación:</label>
-                <div class="star-rating" id="starRating">
-                    <span class="star" data-rating="1">★</span>
-                    <span class="star" data-rating="2">★</span>
-                    <span class="star" data-rating="3">★</span>
-                    <span class="star" data-rating="4">★</span>
-                    <span class="star" data-rating="5">★</span>
+            <div class="catalog-grid">
+                <div class="catalog-item">
+                    <div class="catalog-item-image">
+                        <img src="https://makemore.cl/web/image/product.product/20382/image?unique=1c3a90c" alt="Shampoo Keratina">
+                    </div>
+                    <div class="catalog-item-content">
+                        <h3>Shampoo Keratina</h3>
+                        <p class="catalog-item-price">$4.700</p>
+                        <p>Para cabello seco y dañado. Con aceite de keratina y jojoba.</p>
+                    </div>
                 </div>
-                <input type="hidden" id="rating" name="rating" value="5" required>
+                <div class="catalog-item">
+                    <div class="catalog-item-image">
+                        <img src="https://makemore.cl/web/image/product.product/20362/image?unique=4bbef9f" alt="Aceite Capilar">
+                    </div>
+                    <div class="catalog-item-content">
+                        <h3>Aceite capilar</h3>
+                        <p class="catalog-item-price">$6.000</p>
+                        <p>El aceite de palta hidrata y repara profundamente el cabello.</p>
+                    </div>
+                </div>
             </div>
+        </div>
+    </section>
+</div>
 
-            <div class="form-group">
-                <label for="comentario">Tu Reseña:</label>
-                <textarea id="comentario" name="comentario" required placeholder="Cuéntanos tu experiencia con nuestros productos..."></textarea>
+<!-- SECCIÓN RESEÑAS -->
+<div id="resenas" class="section">
+    <section class="reviews-section">
+        <h2>✧ Reseñas de Nuestras Clientas ✧</h2>
+        <p class="section-subtitle">Lo que dicen nuestras clientas sobre MAR DE LUZ</p>
+        
+        <div class="reviews-container" id="reviewsContainer">
+            <div class="loading" id="loadingReviews">Cargando reseñas... ✧</div>
+        </div>
+
+        <div class="review-form">
+            <h3>✧ Deja tu Reseña ✧</h3>
+            <form onsubmit="agregarResena(event)">
+                <div class="form-group">
+                    <label for="nombre">Tu Nombre:</label>
+                    <input type="text" id="nombre" name="nombre" required placeholder="Ej: María López">
+                </div>
+                
+                <div class="form-group">
+                    <label>Calificación:</label>
+                    <div class="star-rating" id="starRating">
+                        <span class="star" data-rating="1">★</span>
+                        <span class="star" data-rating="2">★</span>
+                        <span class="star" data-rating="3">★</span>
+                        <span class="star" data-rating="4">★</span>
+                        <span class="star" data-rating="5">★</span>
+                    </div>
+                    <input type="hidden" id="rating" name="rating" value="5" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="comentario">Tu Reseña:</label>
+                    <textarea id="comentario" name="comentario" required placeholder="Cuéntanos tu experiencia con nuestros productos..."></textarea>
+                </div>
+
+                <div class="info-note">
+                    <strong>✧ ¡Conectado a Firebase!</strong> Tu reseña se guardará permanentemente y todos podrán verla.
+                </div>
+
+                <button type="submit" class="btn">Publicar Reseña</button>
+            </form>
+        </div>
+    </section>
+</div>
+
+<!-- SECCIÓN CONTACTO -->
+<div id="contacto" class="section">
+    <section class="contact-section">
+        <h2>Contáctanos</h2>
+        <p>Estamos aquí para ayudarte</p>
+        <div class="contact-info">
+            <div class="contact-item">
+                📱 WhatsApp: +56 9 73803408
             </div>
-
-            <div class="info-note">
-                <strong>✧ ¡Conectado a Firebase!</strong> Tu reseña se guardará permanentemente y todos podrán verla.
+            <div class="contact-item">
+                ✉️ Email: contacto@mardeluz.cl
             </div>
-
-            <button type="submit" class="btn">Publicar Reseña</button>
-        </form>
-    </div>
-</section>
-
-<section class="contact-section" id="contacto">
-    <h2>Contáctanos</h2>
-    <p>Estamos aquí para ayudarte</p>
-    <div class="contact-info">
-        <div class="contact-item">
-            WhatsApp: +56 9 1234 5678
+            <div class="contact-item">
+                📍 Valparaíso/Las Cabras
+            </div>
         </div>
-        <div class="contact-item">
-            Email: contacto@mardeluz.cl
-        </div>
-        <div class="contact-item">
-            Santiago, Chile
-        </div>
-    </div>
-</section>
+    </section>
+</div>
 
 <footer>
     <p>&copy; 2025 MAR DE LUZ - Productos de Belleza. Todos los derechos reservados.</p>
     <p>✧ Hecho con amor para realzar tu belleza natural ✧</p>
 </footer>
 
-<!-- Firebase SDK con la última versión -->
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-app.js";
   import { getFirestore, collection, addDoc, getDocs, query, orderBy } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-firestore.js";
 
-  // TUS CREDENCIALES DE FIREBASE
   const firebaseConfig = {
     apiKey: "AIzaSyAYbiQNH6WfqidXO-atfw5M-7GxGfTe4V4",
     authDomain: "tienda-af0d2.firebaseapp.com",
@@ -857,15 +1039,10 @@
     measurementId: "G-8TYNQGB4XQ"
   };
 
-  // Inicializar Firebase
   const app = initializeApp(firebaseConfig);
   const db = getFirestore(app);
 
-  // Cargar reseñas al iniciar
-  cargarResenas();
-
-  // Función para cargar reseñas desde Firebase
-  async function cargarResenas() {
+  window.cargarResenas = async function() {
     const reviewsContainer = document.getElementById('reviewsContainer');
     
     try {
@@ -898,7 +1075,7 @@
         </div>
       `;
     }
-  }
+  };
 
   function agregarResenaAlDOM(resena) {
     const reviewsContainer = document.getElementById('reviewsContainer');
@@ -952,9 +1129,7 @@
       selectedRating = 5;
       updateStars();
       
-      cargarResenas();
-      
-      document.getElementById('resenas').scrollIntoView({ behavior: 'smooth' });
+      window.cargarResenas();
       
     } catch (error) {
       console.error('Error al guardar reseña:', error);
@@ -964,80 +1139,45 @@
 </script>
 
 <script>
-    function ocultarHero() {
-        document.getElementById('hero').classList.add('hidden');
+    // NAVEGACIÓN
+    function mostrarSeccion(seccionId) {
+        document.querySelectorAll('.section').forEach(section => {
+            section.classList.remove('active');
+        });
+        document.getElementById(seccionId).classList.add('active');
+        document.getElementById('breadcrumbs').style.display = 'none';
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    function mostrarHero() {
-        document.getElementById('hero').classList.remove('hidden');
+    function irAInicio() {
+        mostrarSeccion('inicio-section');
     }
 
     function irAProductos() {
-        ocultarHero();
-        document.getElementById('productos').classList.remove('hidden');
-        document.querySelectorAll('.catalog-section').forEach(section => {
-            section.classList.remove('active');
-        });
-        document.getElementById('breadcrumbs').style.display = 'none';
-        
+        mostrarSeccion('inicio-section');
         setTimeout(() => {
-            document.getElementById('productos').scrollIntoView({ behavior: 'smooth' });
+            document.getElementById('categorias').scrollIntoView({ behavior: 'smooth', block: 'start' });
         }, 100);
+    }
+
+    function scrollToCategorias() {
+        document.getElementById('categorias').scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
 
     function irASeccion(seccionId) {
-        ocultarHero();
-        document.getElementById('productos').classList.add('hidden');
-        document.querySelectorAll('.catalog-section').forEach(section => {
-            section.classList.remove('active');
-        });
-        document.getElementById('breadcrumbs').style.display = 'none';
-        
-        setTimeout(() => {
-            document.getElementById(seccionId).scrollIntoView({ behavior: 'smooth' });
-        }, 100);
+        mostrarSeccion(seccionId);
+        if (seccionId === 'resenas') {
+            window.cargarResenas();
+        }
     }
 
     function mostrarCatalogo(categoria, nombreCategoria) {
-        ocultarHero();
-        document.getElementById('productos').classList.add('hidden');
-        
-        document.querySelectorAll('.catalog-section').forEach(section => {
-            section.classList.remove('active');
-        });
-        
-        document.getElementById('catalog-' + categoria).classList.add('active');
+        mostrarSeccion('catalog-' + categoria);
         document.getElementById('breadcrumbs').style.display = 'block';
         document.getElementById('currentCategory').textContent = nombreCategoria;
-        
-        window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    function volverProductos() {
-        document.querySelectorAll('.catalog-section').forEach(section => {
-            section.classList.remove('active');
-        });
-        
-        document.getElementById('breadcrumbs').style.display = 'none';
-        document.getElementById('productos').classList.remove('hidden');
-        
-        setTimeout(() => {
-            document.getElementById('productos').scrollIntoView({ behavior: 'smooth' });
-        }, 100);
-    }
-
-    function volverInicio() {
-        document.querySelectorAll('.catalog-section').forEach(section => {
-            section.classList.remove('active');
-        });
-        
-        document.getElementById('breadcrumbs').style.display = 'none';
-        document.getElementById('productos').classList.remove('hidden');
-        mostrarHero();
-        
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-
+    // ESTRELLAS
     let selectedRating = 5;
     const stars = document.querySelectorAll('.star');
     const ratingInput = document.getElementById('rating');
@@ -1078,16 +1218,6 @@
     function agregarResena(event) {
         window.agregarResenaFirebase(event);
     }
-
-    window.addEventListener('scroll', () => {
-        const hero = document.querySelector('.hero');
-        if (!hero.classList.contains('hidden')) {
-            const scrolled = window.pageYOffset;
-            if (scrolled < window.innerHeight) {
-                hero.style.transform = `translateY(${scrolled * 0.5}px)`;
-            }
-        }
-    });
 </script>
 </body>
 </html>
